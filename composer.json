@@ -1,0 +1,30 @@
+{
+    "name": "valerio/extended-slim-php",
+    "description": "A personal version of SlimPHP with some feature does not included in the vanilla version, like validation of the requestes.",
+    "type": "project",
+    "require": {
+        "slim/slim-skeleton": "^3.1",
+        "dusank/knapsack": "^10.0",
+        "nesbot/carbon": "^1.32",
+        "firebase/php-jwt": "^5.0",
+        "gabordemooij/redbean": "dev-master"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/",
+            "App\\Components\\": "src/components",
+            "App\\Components\\Validation\\": "src/components/validation",
+            "App\\Components\\Validation\\Rules\\": "src/components/validation/rules",
+            "App\\Middlewares\\": "src/middlewares",
+            "App\\Controllers\\": "src/controllers",
+            "App\\Utils\\": "src/utils"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Valerio Belli",
+            "email": "belli.valerio@gmail.com"
+        }
+    ]
+}

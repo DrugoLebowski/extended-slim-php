@@ -1,0 +1,16 @@
+<?php
+
+// Vendor
+use Slim\Http\Request;
+use Slim\Http\Response;
+
+// Internal
+use App\Middlewares\Authentication;
+
+
+$routes = $app->getContainer()->get("settings")["routes"];
+
+$app->get(
+    "/",
+    \App\Controllers\Index::class . ":test"
+);
