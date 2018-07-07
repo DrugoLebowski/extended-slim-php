@@ -1,9 +1,11 @@
 <?php
 
 return [
-    "test"      => "string||required",
+    "test"      => "array||required",
+    "test.a"    => "array||required",
+    "test.a.b"  => "int||lower_equal:2",
     "arrayTest" => [
         "string",
-        "not_regex:/abc\-cbd/",
+        "regex:/abc\-cbd/",
     ],
 ];

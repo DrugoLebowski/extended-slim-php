@@ -14,6 +14,7 @@ class RulesParser
 
     /** @var array */
     private const FIELD_TYPES = [
+        "array",
         "int",
         "float",
         "string",

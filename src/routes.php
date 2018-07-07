@@ -10,7 +10,7 @@ use App\Middlewares\Authentication;
 
 $routes = $app->getContainer()->get("settings")["routes"];
 
-$app->get(
+$app->post(
     "/",
     \App\Controllers\Index::class . ":test"
 );

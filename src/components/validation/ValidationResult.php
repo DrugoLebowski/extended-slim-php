@@ -8,21 +8,33 @@ namespace App\Components\Validation;
  */
 class ValidationResult
 {
+
+    const OK = 0;
+    const ERR_UNPROTECTED_ROUTES = 1;
+    const ERR_UNEXPECTED_PARAMS  = 2;
+    const ERR_NO_SENT_PARAMS     = 3;
+    const ERR_VALIDATION         = 4;
+
     /** @var bool $result */
     private $result;
 
-    /** @var array $message */
-    private $message;
+    /** @var integer $type */
+    private $type;
+
+    /** @var array $param */
+    private $param;
 
     /**
      * ValidationResult constructor.
-     * @param $result
-     * @param array $message
+     * @param bool   $result
+     * @param int    $type
+     * @param string $param
      */
-    public function __construct($result, $message = [])
+    public function __construct(int $type = self::OK, string $param = null)
     {
-        $this->result     = $result;
-        $this->message    = $message;
+        $this->result = $type === self::OK;
+        $this->type   = $type;
+        $this->param  = $param;
     }
 
     /**
@@ -34,11 +46,20 @@ class ValidationResult
     }
 
     /**
+     * @return int
+     */
+    public function getType(): int
+    {
+        return $this->type;
+    }
+
+    /**
      * @return array
      */
-    public function getMessage(): array
+    public function getParam(): array
     {
-        return $this->message;
+        return $this->param;
     }
+
 
 }

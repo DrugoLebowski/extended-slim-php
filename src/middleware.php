@@ -51,7 +51,7 @@ $app->add(function (Request $request, Response $response, $next) use ($app) {
 
     $validation = Validator::validate($parameters, $rules);
     return !$validation->isResult() ?
-        $response->withStatus(400)->withJson($validation->getMessage()) :
+        $response->withStatus(400)->withJson($validation->getParam()) :
         $next($request, $response);
 });
 
