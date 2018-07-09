@@ -1,22 +1,24 @@
 <?php
 
-namespace App\components\validation\rules;
+namespace App\components\Validation\Rules;
+
+use App\Components\Validation\Interfaces\Rule;
 
 /**
- * Class GreaterEqual
+ * Class Equal
  * @package App\components\validation\rules
  */
-class GreaterEqual
+class Equal implements Rule
 {
 
     /** @var float */
     private $referenceValue;
 
     /**
-     * GreaterEqual constructor.
+     * Equal constructor.
      * @param float $referenceValue
      */
-    public function __construct(float $referenceValue)
+    public function __construct($referenceValue)
     {
         $this->referenceValue = $referenceValue;
     }
@@ -25,8 +27,8 @@ class GreaterEqual
      * @param $data
      * @return bool
      */
-    public function __invoke($data)
+    public function validate($data): bool
     {
-        return $data >= $this->referenceValue;
+        return $data == $this->referenceValue;
     }
 }

@@ -1,12 +1,14 @@
 <?php
 
-namespace App\components\validation\rules;
+namespace App\components\Validation\Rules;
+
+use App\Components\Validation\Interfaces\Rule;
 
 /**
  * Class EqualLength
  * @package App\components\validation\rules
  */
-class EqualLength
+class EqualLength implements Rule
 {
 
     /** @var int */
@@ -25,7 +27,7 @@ class EqualLength
      * @param $data
      * @return bool
      */
-    public function __invoke($data): bool
+    public function validate($data): bool
     {
         return count($data) === $this->length;
     }

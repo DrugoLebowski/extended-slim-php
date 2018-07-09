@@ -2,6 +2,7 @@
 
 namespace App\Components\Validation;
 
+use App\Components\Validation\Interfaces\Rule;
 
 class Rules
 {
@@ -29,12 +30,20 @@ class Rules
      * @param mixed $content
      * @return bool
      */
-    public function __invoke($content): bool
+    public function validate($content): bool
     {
         return array_reduce(
             $this->rules,
             function ($reduced, $rule) use ($content) {
-                return $reduced && $rule($content);
+                /**
+                 * @var bool $reduced
+                 * @var Rule $rule
+                 */
+                return $reduced && (
+                    is_callable($rule) ?
+                        $rule($content) :
+                        $rule->validate($content)
+                );
             },
             true
         );

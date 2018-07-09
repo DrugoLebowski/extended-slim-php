@@ -2,13 +2,14 @@
 
 namespace App\Components\Validation\Rules;
 
+use App\Components\Validation\Interfaces\Rule;
 use Carbon\Carbon;
 
 /**
  * Class Date
  * @package App\Components\Validation\Rules
  */
-class Date
+class Date implements Rule
 {
 
     /** @var string */
@@ -24,7 +25,11 @@ class Date
         $this->format = $format;
     }
 
-    public function __invoke($content)
+    /**
+     * @param $content
+     * @return bool
+     */
+    public function validate($content): bool
     {
         try {
             Carbon::createFromFormat($this->format, $content);

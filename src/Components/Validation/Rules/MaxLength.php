@@ -1,12 +1,14 @@
 <?php
 
-namespace App\components\validation\rules;
+namespace App\components\Validation\Rules;
+
+use App\Components\Validation\Interfaces\Rule;
 
 /**
  * Class MaxLength
  * @package App\components\validation\rules
  */
-class MaxLength
+class MaxLength implements Rule
 {
 
     /** @var int */
@@ -21,7 +23,7 @@ class MaxLength
         $this->length = $length;
     }
 
-    public function __invoke($data)
+    public function validate($data): bool
     {
         return count($data) <= $this->length;
     }

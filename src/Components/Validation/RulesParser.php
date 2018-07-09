@@ -2,6 +2,8 @@
 
 namespace App\Components\Validation;
 
+use App\Components\Validation\Exceptions\UnrecognizedRuleException;
+use App\Components\Validation\Interfaces\Rule;
 use App\Utils\Snakize;
 use App\Utils\Pascalize;
 
@@ -21,6 +23,7 @@ class RulesParser
         "timestamp",
         "date",
         "bool",
+        "file",
     ];
 
     /**
@@ -31,7 +34,8 @@ class RulesParser
      */
     public static function parse($data): array
     {
-        if (!is_array($data)) throw new \Exception("Rules are not valid.");
+        if (!is_array($data))
+            throw new \Exception("Rules are not valid.");
 
         $rules = [];
         foreach ($data as $field => $fieldRules) {
@@ -62,48 +66,37 @@ class RulesParser
      */
     private static function parseFieldRules($rules): array
     {
-        $type = null;
         $parsedRules = [];
         foreach ($rules as $rule) {
-            $ruleParts = explode(":", $rule);
+            // The rule is an object defined by the user.
+            if (is_callable($rule)) {
+                array_push(
+                    $parsedRules,
+                    $rule
+                );
+            } else if (is_object($rule)) {
+                if (! $rule instanceof Rule)
+                    throw new UnrecognizedRuleException("The object must implements the Rule interface.");
 
-            $ruleType      = $ruleParts[0];
-            $ruleParameter = null;
-            if (!empty($ruleParts[1]))
-                $ruleParameter = $ruleParts[1];
+                array_push(
+                    $parsedRules,
+                    $rule
+                );
+            } else {
+                $ruleParts = explode(":", $rule);
 
-            if (array_search($ruleType, static::getTypesOfRules()) === false)
-                throw new \Exception("It has been used an unknown rule.");
+                $ruleType = array_shift($ruleParts);
+                if (array_search($ruleType, RulesUtils::getTypesOfRules()) === false)
+                    throw new UnrecognizedRuleException("It has been used an unknown rule.");
 
-            $className = Pascalize::transform($ruleType);
-            $class     = "\\App\\Components\\Validation\\Rules\\$className";
-            array_push(
-                $parsedRules,
-                is_null($ruleParameter) ? new $class() : new $class($ruleParameter)
-            );
+                array_push(
+                    $parsedRules,
+                    RulesFactory::create($ruleType, array_shift($ruleParts))
+                );
+            }
         }
 
         return $parsedRules;
-    }
-
-    /**
-     * Return the available types of rules.
-     *
-     * @return array
-     */
-    private static function getTypesOfRules(): array
-    {
-        $types = [];
-        foreach (glob(__DIR__."/rules/*.php") as $file) {
-            $matches = [];
-            preg_match("/^.+\/(.+).php$/", $file, $matches);
-            array_push(
-                $types,
-                Snakize::transform($matches[1])
-            );
-        }
-
-        return $types;
     }
 
 }

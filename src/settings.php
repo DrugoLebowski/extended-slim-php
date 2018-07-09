@@ -41,7 +41,10 @@ return [
 
         'salt' => '*************INSERT A SALT*************',
 
-        'validation_rules_directory' => __DIR__ . "/rules",
+        'validation' => [
+            'policy'             => 'default_deny',
+            'policies_directory' => __DIR__ . "/Policies",
+        ],
 
         'upload_directory'          => __DIR__.'/../upload',
 

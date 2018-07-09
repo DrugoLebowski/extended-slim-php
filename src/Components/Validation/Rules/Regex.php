@@ -2,7 +2,14 @@
 
 namespace App\Components\Validation\Rules;
 
-class NotRegex
+use App\Components\Validation\Exceptions\InvalidRuleException;
+use App\Components\Validation\Interfaces\Rule;
+
+/**
+ * Class Regex
+ * @package App\Components\Validation\Rules
+ */
+class Regex implements Rule
 {
 
     /** @var int */
@@ -18,7 +25,7 @@ class NotRegex
     {
         $regularExpressionTester = "/^\/.+\/[gimuy]*$/";
         if (!preg_match($regularExpressionTester, $rule))
-            throw new \Exception("The string is not a regular expression.");
+            throw new InvalidRuleException("The string is not a regular expression.");
 
         $this->rule = $rule;
     }
@@ -29,8 +36,8 @@ class NotRegex
      * @param $content
      * @return bool
      */
-    public function __invoke($content)
+    public function validate($content): bool
     {
-        return !preg_match($this->rule, $content);
+        return !!preg_match($this->rule, $content);
     }
 }

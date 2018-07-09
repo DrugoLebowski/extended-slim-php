@@ -33,6 +33,7 @@ $app->add(
 
 // Check the validity of the data for the requested route
 $app->add(function (Request $request, Response $response, $next) use ($app) {
+    $container = $app->getContainer();
     $callable = explode(
         ":",
         (string) $request->getAttribute("route")->getCallable()
@@ -43,14 +44,20 @@ $app->add(function (Request $request, Response $response, $next) use ($app) {
     $action     = $callable[1];
 
     // Get the rules
-    $rules = $app->getContainer()->get("validation_rules")($controller, $action);
+    $rules = $container->get("validation_rules")($controller, $action);
     $parameters = array_merge(
         $request->getAttribute("routeInfo")[2],
-        $request->getParams() ?? []
+        $request->getParams() ?? [],
+        $request->getUploadedFiles() ?? []
     );
 
-    $validation = Validator::validate($parameters, $rules);
-    return !$validation->isResult() ?
+    $settings = $container->get("settings");
+    $policy   = "default_deny";
+    if (!empty($settings["validation"]) && !empty($settings["validation"]["policy"]))
+        $policy = $settings["validation"]["policy"];
+
+    $validation = Validator::validate($parameters, $rules, $policy);
+    return !$validation->isPassed() ?
         $response->withStatus(400)->withJson($validation->getParam()) :
         $next($request, $response);
 });

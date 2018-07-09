@@ -10,13 +10,14 @@ class ValidationResult
 {
 
     const OK = 0;
-    const ERR_UNPROTECTED_ROUTES = 1;
-    const ERR_UNEXPECTED_PARAMS  = 2;
-    const ERR_NO_SENT_PARAMS     = 3;
-    const ERR_VALIDATION         = 4;
+    const ERR_UNPROTECTED_ROUTES      = 1;
+    const ERR_UNEXPECTED_PARAMS       = 2;
+    const ERR_NO_SENT_PARAMS          = 3;
+    const ERR_VALIDATION              = 4;
+    const ERR_INCOMPATIBLE_RULES_DATA = 5;
 
-    /** @var bool $result */
-    private $result;
+    /** @var bool $passed */
+    private $passed;
 
     /** @var integer $type */
     private $type;
@@ -26,13 +27,13 @@ class ValidationResult
 
     /**
      * ValidationResult constructor.
-     * @param bool   $result
-     * @param int    $type
+     *
+     * @param int $type
      * @param string $param
      */
     public function __construct(int $type = self::OK, string $param = null)
     {
-        $this->result = $type === self::OK;
+        $this->passed = $type === self::OK;
         $this->type   = $type;
         $this->param  = $param;
     }
@@ -40,9 +41,9 @@ class ValidationResult
     /**
      * @return bool
      */
-    public function isResult(): bool
+    public function isPassed(): bool
     {
-        return $this->result;
+        return $this->passed;
     }
 
     /**
@@ -56,7 +57,7 @@ class ValidationResult
     /**
      * @return array
      */
-    public function getParam(): array
+    public function getParam(): string
     {
         return $this->param;
     }

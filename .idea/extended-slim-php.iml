@@ -2,7 +2,32 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="App" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Components" isTestSource="true" packagePrefix="App\Components\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Components/Validation/Rules" isTestSource="true" packagePrefix="App\Components\Validation\Rules\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Middlewares" isTestSource="true" packagePrefix="App\Middlewares\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Components/Validation" isTestSource="true" packagePrefix="App\Components\Validation\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Controllers" isTestSource="true" packagePrefix="App\Controllers\" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Components/Validation/Interfaces" isTestSource="true" packagePrefix="App\Components\Validation\Interfaces\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Utils" isTestSource="true" packagePrefix="App\Utils\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Components/Validation/Exceptions" isTestSource="true" packagePrefix="App\Components\Validation\Exceptions\" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/container-interop/container-interop" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dusank/knapsack" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/firebase/php-jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/gabordemooij/redbean" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/monolog/monolog" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nesbot/carbon" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nikic/fast-route" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pimple/pimple" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/slim/php-view" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/slim/slim" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/slim/slim-skeleton" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/translation" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

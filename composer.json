@@ -12,12 +12,14 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/",
-            "App\\Components\\": "src/components",
-            "App\\Components\\Validation\\": "src/components/validation",
-            "App\\Components\\Validation\\Rules\\": "src/components/validation/rules",
-            "App\\Middlewares\\": "src/middlewares",
-            "App\\Controllers\\": "src/controllers",
-            "App\\Utils\\": "src/utils"
+            "App\\Components\\": "src/Components",
+            "App\\Components\\Validation\\": "src/Components/Validation",
+            "App\\Components\\Validation\\Exceptions\\": "src/Components/Validation/Exceptions",
+            "App\\Components\\Validation\\Interfaces\\": "src/Components/Validation/Interfaces",
+            "App\\Components\\Validation\\Rules\\": "src/Components/Validation/Rules",
+            "App\\Middlewares\\": "src/Middlewares",
+            "App\\Controllers\\": "src/Controllers",
+            "App\\Utils\\": "src/Utils"
         }
     },
     "license": "MIT",
